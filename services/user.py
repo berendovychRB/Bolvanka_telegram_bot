@@ -13,7 +13,7 @@ def save_user(message):
         "last_name": message.from_user.last_name,
     }
 
-    r = requests.post(url=settings.post_url,
+    r = requests.post(url=settings.users_url,
                       data=json.dumps(data),
                       headers=settings.headers)
     response = {

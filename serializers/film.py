@@ -1,4 +1,6 @@
 from typing import List
+from config.languages import languages
+from config.languages import default_language as d_lan
 
 
 async def film_serializer(films: List, message):
@@ -6,13 +8,13 @@ async def film_serializer(films: List, message):
         count = 1
         for film in films:
             await message.answer(f"""
-            {count}.<b>Name:</b> {film["name"]}
-            <b>Genre:</b> {film["genre"]}
-            <b>Mark:</b> {film["mark"]}
-            <b>Comment:</b> {film["comments"]}
+            {count}.<b>{languages[d_lan]['name']}</b> {film["name"]}
+            <b>{languages[d_lan]['genre']}</b> {film["genre"]}
+            <b>{languages[d_lan]['mark']}</b> {film["mark"]}
+            <b>{languages[d_lan]['comment']}</b> {film["comments"]}
             """, parse_mode="html")
             count += 1
     else:
         await message.answer(
-            "You haven't saved any movies yet"
+            f"{languages[d_lan]['noSavedFilms']}"
         )

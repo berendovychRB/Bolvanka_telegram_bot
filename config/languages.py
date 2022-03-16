@@ -18,6 +18,19 @@ languages = {
         "welcome": "Мене звуть Болванка.\nЯ допоможу вам з зберіганням переглянутих фільмів та тих, які ще хочеться переглянути.",
         "comeback": "З поверненням",
         "error": "Щось пішло не так =(",
+        "name": "Назва:",
+        "genre": "Жанр:",
+        "mark": "Оцінка:",
+        "comment": "Коментар:",
+        "noSavedFilms": "Ви ще не зберегли жодного фільму",
+        "fillForm": "Буль ласка заповніть форма, як показано нижче:\n",
+        "example": "Назва\nЖанр\nКоментар\n",
+        "note": "Всі поля окрім Назви можуть бути пропущені.",
+        "addTittle": "Добавити Назву",
+        "addGenre": "Добавити Жанр",
+        "addComment": "Добавити Коментар",
+        "cancelAddingFilm": "Додавання фільму відмінено",
+        "filmSaved": "Фільм збережено"
     },
     "english": {
         "chooseLang": "Please choose a language!",
@@ -37,5 +50,18 @@ languages = {
         "welcome": "My name is Bolvanka.\nI will help you save the movies you have watched and those you still want to watch.",
         "comeback": "Welcome back",
         "error": "Something went wrong = (",
+        "name": "Name:",
+        "genre": "Genre:",
+        "mark": "Mark:",
+        "comment": "Comment:",
+        "noSavedFilms": "You haven't saved any movies yet",
+        "fillForm": "Please fill out the form as shown below:\n",
+        "example": "Title\nGenre\nComment\n",
+        "note": "All fields except Name can be skipped.",
+        "addTittle": "Add Tittle",
+        "addGenre": "Add Genre",
+        "addComment": "Add Comment",
+        "cancelAddingFilm": "Movie adding canceled",
+        "filmSaved": "Movie was saved"
     }
 }
