@@ -46,26 +46,47 @@ async def get_all_unreviewed_films(message: types.Message):
 
 
 async def add_film(message: types.Message):
-    # await message.reply(
-    #     f"{languages[d_lan]['fillForm']}{languages[d_lan]['example']}{languages[d_lan]['note']}",
-    #     reply_markup=nav.addMenu)
-    # # await film.add_film(message)
     global data
     data = {"name": None, "genre": None, "comments": None}
 
-    bot.send_message(message.chat.id, "add title, text, comments in separated messages\n\nnow write title")
+    await bot.send_message(message.chat.id,
+                           f"{languages[d_lan]['note']}",
+                           reply_markup=nav.addMenu)
+    bot.state = NAME
 
 
 async def add_tittle(message: types.Message):
-    await message.answer(message.text)
+    data['name'] = message.text
+
+    await bot.send_message(message.chat.id,
+                           f"{languages[d_lan]['name']} {message.text}\n{languages[d_lan]['nowAddGenre']}")
+    bot.state = GENRE
 
 
 async def add_genre(message: types.Message):
-    pass
+    data["genre"] = message.text
+
+    await bot.send_message(message.chat.id,
+                           f"{languages[d_lan]['genre']} {message.text}\n{languages[d_lan]['nowAddComment']}")
+    bot.state = COMMENTS
 
 
 async def add_comment(message: types.Message):
-    pass
+    data['comments'] = message.text
+
+    await bot.send_message(message.chat.id,
+                           f"{languages[d_lan]['comment']} {message.text}")
+
+    msg = f"""{languages[d_lan]['gotData']}
+    {languages[d_lan]['name']} {data['name']}
+    {languages[d_lan]['genre']} {data['genre']}
+    {languages[d_lan]['comment']} {data['comments']}
+    """
+    await bot.send_message(message.chat.id,
+                           msg,
+                           reply_markup=nav.menu)
+    bot.state = None
+    await film.add_film(message, data)
 
 
 async def cancel(message: types.Message):
@@ -74,29 +95,25 @@ async def cancel(message: types.Message):
     bot.state = None
 
 
-async def confirm(message: types.Message):
-    await film.add_film(message)
-    await message.answer(f"{languages[d_lan]['filmSaved']}",
-                         reply_markup=nav.menu)
-
-
 def register_handlers(dp: Dispatcher):
     dp.register_message_handler(start, commands=["start"])
     dp.register_message_handler(add_film,
-                                Text(contains=f"{languages[d_lan]['addFilm']}"))
+                                Text(
+                                    contains=f"{languages[d_lan]['addFilm']}"))
     dp.register_message_handler(get_all_films,
-                                Text(contains=f"{languages[d_lan]['allFilms']}"))
+                                Text(
+                                    contains=f"{languages[d_lan]['allFilms']}"))
     dp.register_message_handler(get_all_reviewed_films,
-                                Text(contains=f"{languages[d_lan]['reviewedFilms']}"))
+                                Text(
+                                    contains=f"{languages[d_lan]['reviewedFilms']}"))
     dp.register_message_handler(get_all_unreviewed_films,
-                                Text(contains=f"{languages[d_lan]['unreviewedFilms']}"))
-    dp.register_message_handler(add_tittle,
-                                Text(contains=f"{languages[d_lan]['addTittle']}"))
-    dp.register_message_handler(add_genre,
-                                Text(contains=f"{languages[d_lan]['addGenre']}"))
-    dp.register_message_handler(add_comment,
-                                Text(contains=f"{languages[d_lan]['addComment']}"))
+                                Text(
+                                    contains=f"{languages[d_lan]['unreviewedFilms']}"))
     dp.register_message_handler(cancel,
                                 Text(contains=f"{languages[d_lan]['cancel']}"))
-    dp.register_message_handler(confirm,
-                                Text(contains=f"{languages[d_lan]['confirm']}"))
+    dp.register_message_handler(add_tittle,
+                                lambda msg: bot.state == NAME)
+    dp.register_message_handler(add_genre,
+                                lambda msg: bot.state == GENRE)
+    dp.register_message_handler(add_comment,
+                                lambda msg: bot.state == COMMENTS)

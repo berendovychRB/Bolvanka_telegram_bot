@@ -1,4 +1,6 @@
 import json
+import logging
+
 import requests
 
 from config import settings
@@ -31,18 +33,14 @@ async def retrieve_unreviewed_films(message):
     await film_serializer(films=json.loads(films), message=message)
 
 
-async def add_film(message):
+async def add_film(message, data):
     url = settings.films_url
     user_id = message.from_user.id
-    data = {
-        "name": "SomeFilmName",
-        "genre": "Action",
-        "user_id": f"{user_id}"
-    }
-    # r = requests.post(
-    #     url=url,
-    #     headers=settings.headers,
-    #     data=json.dumps(data)
-    # )
-    # print(r.content)
+    data["user_id"] = user_id
+    r = requests.post(
+        url=url,
+        headers=settings.headers,
+        data=json.dumps(data)
+    )
+    logging.info(f"{r.status_code}|{r.text}")
 
