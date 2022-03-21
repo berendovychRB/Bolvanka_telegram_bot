@@ -24,3 +24,11 @@ btnAddComment = KeyboardButton(f"{languages[d_lan]['addComment']}")
 btnCancel = KeyboardButton(f"{languages[d_lan]['cancel']}")
 addMenu = ReplyKeyboardMarkup(resize_keyboard=True)
 addMenu.row(btnCancel)
+
+
+'''***************************** InlineMenu ****************************'''
+btnDelete = InlineKeyboardButton(f"{languages[d_lan]['delete']}",
+                                 callback_data="delete")
+btnReviewed = InlineKeyboardButton(f"{languages[d_lan]['reviewed']}",
+                                   callback_data="reviewed")
+inlineMenu = InlineKeyboardMarkup().add(btnDelete, btnReviewed)

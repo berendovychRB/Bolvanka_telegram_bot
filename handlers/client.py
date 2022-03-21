@@ -95,6 +95,16 @@ async def cancel(message: types.Message):
     bot.state = None
 
 
+async def delete(callback: types.CallbackQuery):
+    await bot.answer_callback_query(callback.id,
+                                    text=f"{languages[d_lan]['wasDeleted']}")
+    r = await film.delete(callback)
+    if r == 200:
+        await bot.edit_message_text(f"{languages[d_lan]['wasDeleted']}",
+                                    chat_id=callback.message.chat.id,
+                                    message_id=callback.message.message_id)
+
+
 def register_handlers(dp: Dispatcher):
     dp.register_message_handler(start, commands=["start"])
     dp.register_message_handler(add_film,
@@ -117,3 +127,5 @@ def register_handlers(dp: Dispatcher):
                                 lambda msg: bot.state == GENRE)
     dp.register_message_handler(add_comment,
                                 lambda msg: bot.state == COMMENTS)
+    dp.register_callback_query_handler(delete,
+                                       lambda c: c.data == "delete")

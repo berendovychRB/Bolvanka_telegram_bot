@@ -33,7 +33,10 @@ languages = {
         "addComment": "Добавити Коментар",
         "cancelAddingFilm": "Додавання фільму відмінено",
         "filmSaved": "Фільм збережено",
-        "gotData": "Я отримав усю інформацію!\n"
+        "gotData": "Я отримав усю інформацію!\n",
+        "delete": "Видалити",
+        "reviewed": "Переглянуто",
+        "wasDeleted": "Фільм видалено",
     },
     "english": {
         "chooseLang": "Please choose a language!",
@@ -68,6 +71,9 @@ languages = {
         "addComment": "Add Comment",
         "cancelAddingFilm": "Movie adding canceled",
         "filmSaved": "Movie was saved",
-        "gotData": "I got all data!\n"
+        "gotData": "I got all data!\n",
+        "delete": "Delete",
+        "reviewed": "Reviewed",
+        "wasDeleted": "Movie was deleted",
     }
 }

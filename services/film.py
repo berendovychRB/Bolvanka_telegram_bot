@@ -44,3 +44,14 @@ async def add_film(message, data):
     )
     logging.info(f"{r.status_code}|{r.text}")
 
+
+async def delete(callback):
+    user_id = callback.from_user.id
+    name = callback.message.text.split(":")[1].split("\n")[0].lstrip()
+    url = f"{settings.films_url}{user_id}/{name}"
+    r = requests.delete(
+        url=url,
+        headers=settings.headers
+    )
+    return r.status_code
+
