@@ -13,6 +13,8 @@ bot.state = None
 NAME = 1
 GENRE = 2
 COMMENTS = 3
+MARK = 4
+data_list = []
 
 
 async def start(message: types.Message):
@@ -105,6 +107,26 @@ async def delete(callback: types.CallbackQuery):
                                     message_id=callback.message.message_id)
 
 
+async def review(callback: types.CallbackQuery):
+    await bot.answer_callback_query(callback.id,
+                                    text=f"{languages[d_lan]['reviewed']}")
+    await bot.send_message(chat_id=callback.message.chat.id,
+                           text=f"{languages[d_lan]['markFilm']}")
+    global data_list
+    data_list.append(callback.from_user.id)
+    data_list.append(callback.message.text)
+    bot.state = MARK
+
+
+async def add_mark(message: types.Message):
+    mark = message.text
+    r = await film.review(data_list, mark)
+    if r == 200:
+        await bot.send_message(message.chat.id,
+                               f"{languages[d_lan]['filmWasMarked']} {mark}")
+    bot.state = None
+
+
 def register_handlers(dp: Dispatcher):
     dp.register_message_handler(start, commands=["start"])
     dp.register_message_handler(add_film,
@@ -129,3 +151,7 @@ def register_handlers(dp: Dispatcher):
                                 lambda msg: bot.state == COMMENTS)
     dp.register_callback_query_handler(delete,
                                        lambda c: c.data == "delete")
+    dp.register_callback_query_handler(review,
+                                       lambda c: c.data == "reviewed")
+    dp.register_message_handler(add_mark,
+                                lambda msg: bot.state == MARK)

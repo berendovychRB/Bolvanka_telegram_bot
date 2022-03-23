@@ -32,3 +32,4 @@ btnDelete = InlineKeyboardButton(f"{languages[d_lan]['delete']}",
 btnReviewed = InlineKeyboardButton(f"{languages[d_lan]['reviewed']}",
                                    callback_data="reviewed")
 inlineMenu = InlineKeyboardMarkup().add(btnDelete, btnReviewed)
+inlineMenuWithoutReview = InlineKeyboardMarkup().add(btnDelete)

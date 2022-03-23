@@ -37,6 +37,8 @@ languages = {
         "delete": "Видалити",
         "reviewed": "Переглянуто",
         "wasDeleted": "Фільм видалено",
+        "markFilm": "Оцініть фільм від 1 до 10:",
+        "filmWasMarked": "Фільм позначено як 'Переглянуто' і додана оцінка"
     },
     "english": {
         "chooseLang": "Please choose a language!",
@@ -75,5 +77,7 @@ languages = {
         "delete": "Delete",
         "reviewed": "Reviewed",
         "wasDeleted": "Movie was deleted",
+        "markFilm": "Rate the movie from 1 to 10:",
+        "filmWasMarked": "Film marked as 'Viewed' and rated"
     }
 }

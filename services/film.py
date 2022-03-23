@@ -55,3 +55,13 @@ async def delete(callback):
     )
     return r.status_code
 
+
+async def review(data, mark):
+    user_id = data[0]
+    name = data[1].split(":")[1].split("\n")[0].lstrip()
+    url = f"{settings.films_url}{user_id}/{name}/{mark}"
+    r = requests.patch(
+        url=url,
+        headers=settings.headers
+    )
+    return r.status_code
