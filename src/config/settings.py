@@ -3,6 +3,6 @@ headers = {
         "accept": "application/json",
         "Content-Type": "application/json"
 }
-users_url = "http://127.0.0.1:8000/users/"
-films_url = "http://127.0.0.1:8000/films/"
+users_url = "http://172.28.0.4:8000/users/"
+films_url = "http://172.28.0.4:8000/films/"
 
