@@ -1,5 +1,6 @@
 import json
 import logging
+
 import requests
 
 from config import settings
@@ -13,12 +14,7 @@ def save_user(message):
         "last_name": message.from_user.last_name,
     }
 
-    r = requests.post(url=settings.users_url,
-                      data=json.dumps(data),
-                      headers=settings.headers)
-    response = {
-        "status_code": r.status_code,
-        "text": r.content
-    }
+    r = requests.post(url=settings.users_url, data=json.dumps(data), headers=settings.headers)
+    response = {"status_code": r.status_code, "text": r.content}
     logging.info(f"{response['status_code']}|{response['text']}")
     return response
