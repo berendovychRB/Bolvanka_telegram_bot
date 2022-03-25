@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters import Text
 from bot import bot
 from config.languages import languages
 from config.languages import default_language as d_lan
-from services import user, film
+from services import film, user
 from utils import keyboard as nav
 
 data = {"name": None, "genre": None, "comments": None}
