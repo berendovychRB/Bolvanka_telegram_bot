@@ -48,6 +48,8 @@ async def delete(callback):
 async def review(data, mark):
     user_id = data[0]
     mark = int(abs(mark))
+    if mark > 10:
+        mark = 10
     name = data[1].split(":")[1].split("\n")[0].lstrip()
     url = f"{settings.films_url}{user_id}/{name}/{mark}"
     r = requests.patch(url=url, headers=settings.headers)
